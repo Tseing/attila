@@ -40,7 +40,7 @@
           </span>
         </nav>
         <h1 class="post-title">Category {{ category }}</h1>
-        <span class="blog-description">Posts: {{ articles|count }}</span>
+        <span class="blog-description">{{ articles|count }} 篇</span>
         {% if selected_cover %}
             <div class="blog-cover cover" style="background-image: url('{{ selected_cover }}')">
         {% elif selected_color %}
