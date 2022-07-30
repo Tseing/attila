@@ -112,6 +112,11 @@
     <!-- Post content -->
     <main class="content" role="main">
         <article class="post">
+          {% if article.toc %}
+            <div class="toc-nav">
+              {{article.toc}}
+            </div>
+          {% endif %}
         <div class="inner">
             <section class="post-content">
                 {{article.content}}
