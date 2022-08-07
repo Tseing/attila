@@ -37,6 +37,11 @@
             {% endif %}
             {% include 'partials/comments_count.html' %}
             </div>
+            {% if article.tags %}
+                <div class="index-tags">
+                    {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}"># {{ tag | escape }}</a>{% endfor %}
+                </div>
+            {% endif %}
         </article>
     {% endfor %}
 
