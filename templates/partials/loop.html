@@ -17,6 +17,9 @@
                         <a href="{{ SITEURL }}/{{ author.url }}">{{ author_name }}</a>
                     {% endfor %}
                      | <time datetime="{{ article.locale_date }}">{{ article.locale_date }}</time>
+                    {% if article.category %}
+                     | Archived in <a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category.name }}</a>
+                    {% endif %}
                 </span>
                 <div class="clear"></div>
             </header>
@@ -36,12 +39,12 @@
                 </section>
             {% endif %}
             {% include 'partials/comments_count.html' %}
-            </div>
             {% if article.tags %}
                 <div class="index-tags">
                     {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}"># {{ tag | escape }}</a>{% endfor %}
                 </div>
             {% endif %}
+            </div>
         </article>
     {% endfor %}
 
