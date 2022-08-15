@@ -45,7 +45,7 @@
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
           </span>
         </nav>
-        <h1 class="post-title">Category {{ category }}</h1>
+        <h1 class="post-title"><i class="fa fa-book"></i> {{ category }}</h1>
         <span class="blog-description">{{ articles|count }} 篇</span>
         {% if selected_cover %}
             <div class="blog-cover cover" style="background-image: url('{{ selected_cover }}')">
