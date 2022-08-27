@@ -1,0 +1,40 @@
+:root {
+    --waline-font-size: .9em !important;
+    --waline-avatar-size: 3.25em !important;
+    --waline-badge-font-size: 0.65em !important;
+}
+
+.wl-card .wl-admin-actions {
+    font-size: 0.8em !important;
+}
+
+.wl-header input {
+    font-size: 0.725em !important;
+}
+
+.wl-editor:focus, .wl-input:focus {
+    background-color: white !important;
+}
+
+.wl-user > img,
+.wl-avatar img {
+    margin: 0;
+    filter: drop-shadow(1px 5px 5px rgba(0,0,0,.5));
+}
+
+button[title="表情包"] {
+    display: none;
+}
+
+@media only screen and (min-width: 1000px){
+    #waline {
+        margin: auto 16%;
+    }
+}
+
+@media only screen and (max-width: 900px) and (orientation: landscape){
+    #waline {
+        margin: 0 1.75em;
+    }
+}
+

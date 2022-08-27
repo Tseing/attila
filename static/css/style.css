@@ -503,7 +503,7 @@ html.menu-active,
 }
 
 body {
-    font: 400 2em / 1.5em 'Noto Sans SC';
+    font: 400 2em / 1.5em "Noto Sans KR", "Noto Sans SC";
     color: #45484d;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -529,7 +529,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Fira Sans', "Noto Sans KR", "Noto Sans SC", sans-serif;
     text-rendering: optimizeLegibility;
     color: #000;
 }
@@ -657,7 +657,7 @@ blockquote {
     font-weight: 400;
     color: #45484d;
     background: #faf9f7;
-    font-family: "Noto Sans SC";
+    font-family: "Noto Sans KR", "Noto Sans SC";
     font-size: 0.9em;
     margin-left: 11%;
     margin-right: 11%;
@@ -754,8 +754,8 @@ code,
 tt {
     position: relative;
     margin: 0 0;
-    padding: 0.3em 5px;
-    font-family: 'Ubuntu Mono', monospace, sans-serif;
+    padding: 0.25em 5px;
+    font-family: 'Ubuntu Mono', "Noto Sans KR", "Noto Sans SC", sans-serif;
     font-size: 0.9em;
     /* white-space: pre; */
     background: #faf9f7;
@@ -769,7 +769,7 @@ pre {
     margin-top: 40px;
     padding: 1em;
     overflow-y: hidden;
-    font-family: 'Ubuntu Mono', monospace, sans-serif;
+    font-family: 'Ubuntu Mono', "Noto Sans KR", "Noto Sans SC", sans-serif;
     white-space: pre;
     background: #faf9f7;
     border: 1px solid #e5e4e1;
@@ -1170,7 +1170,7 @@ img {
     border-left: 1px solid #e5e4e1;
     z-index: 400;
     overflow: hidden;
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Fira Sans', "Noto Sans KR", "Noto Sans SC", sans-serif;
     box-shadow: inset -2px 0 7px rgba(0, 0, 0, 0.1);
     transform: translate3d(16em, 0, 0);
     transition: all ease-out 0.25s
@@ -1553,7 +1553,7 @@ img {
     z-index: 10;
     display: block;
     margin-bottom: 1.333em;
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Fira Sans', "Noto Sans KR", "Noto Sans SC", sans-serif;
     font-size: 0.8em;
     font-weight: 400;
     line-height: 1.333em;
@@ -1586,7 +1586,7 @@ img {
     margin-top: 0px;
     margin-bottom: 0px;
     text-align: justify;
-    font-family: "Fira Sans", "Noto Sans SC";
+    font-family: "Fira Sans", "Noto Sans KR", "Noto Sans SC";
     word-break: normal;
 }
 
@@ -1594,7 +1594,7 @@ img {
     margin-top: 30px;
     text-align: left;
     font-size: 0.9em;
-    font-family: "Fira Sans", "Noto Sans SC";
+    font-family: "Fira Sans", "Noto Sans KR", "Noto Sans SC";
 }
 
 .index-tags a {
@@ -1626,6 +1626,16 @@ img {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+}
+
+.intro {
+    font-style: italic;
+    margin-left: 10%;
+    margin-left: 10%;
+    margin-top: -20px;
+    font-size: 90%;
+    opacity: 0.8;
+    text-align: left;
 }
 
 .post-content .fluid-width-video-wrapper {
@@ -1715,7 +1725,7 @@ img {
 .post-tags {
     /* max-width: 75%;
     float: left; */
-    font-family: 'Fira Sans', sans-serif;
+    font-family: 'Fira Sans', "Noto Sans KR", "Noto Sans SC", sans-serif;
     text-align: center;
     margin-left: 17%;
     margin-right: 17%;
@@ -1865,7 +1875,8 @@ img {
 
 .post-nav {
     position: relative;
-    border-bottom: 1px solid #e5e4e1
+    border-bottom: 1px solid #e5e4e1;
+    margin: 0 17%;
 }
 
 .post-nav:after {
@@ -2060,7 +2071,7 @@ img {
     margin-bottom: 0.6em;
     margin-right: 0.3em;
     padding: 0.35em 1.25em;
-    font-family: "Livvic", "Noto Sans SC";
+    font-family: "Livvic", "Noto Sans KR", "Noto Sans SC";
 }
 
 .tag:focus,
@@ -2099,7 +2110,7 @@ img {
 
 /* location icon */
 i.fa.fa-map-marker.fa-stack-1x {
-    bottom: 10px;
+    bottom: 25%;
 }
 
 @media only screen and (max-width: 900px) and (orientation: landscape){
@@ -2146,111 +2157,11 @@ i.fa.fa-map-marker.fa-stack-1x {
     blockquote::after{
         left: 80%
     }
-}
-
-@media only screen and (max-width: 400px) and (orientation: portrait){
-    html {
-        font-size: 50%;
-    }
-    .container {
-        padding-top: 0;
-    }
-    #index .inner {
-        padding: 0 5%;
-        margin-left: 0;
-        margin-right: 0;
-    }
-    .inner {
-        padding: 0 5%;
-        margin-left: 0;
-        margin-right: 0;
-    }
-    .post-content,
-    .post-tags,
-    .post-author {
-        margin-left: 0;
-        margin-right: 0;
-    }
-    .post-template #main-header {
-        padding: 16px 0
-    }
-    #main-nav a {
-        margin: 16px
-    }
-    .post-author-avatar {
-        margin: -0.25em 0 0 0.5em
-    }
-    .container .post.featured .post-title:after {
-        left: 0;
-        top: -1.75em
-    }
-    .post-content img,
-    .post-content .fluid-width-video-wrapper {
-        width: 90%;
-        margin-left: auto
-    }
-    .post-nav:after {
-        display: none
-    }
-    .post-nav-next,
-    .post-nav-prev {
-        display: block;
-        width: 100%
-    }
-    .post-nav-teaser {
-        position: relative;
-        min-height: 4em;
-        padding: 2em 0
-    }
-    .post-nav-next .post-nav-teaser:after {
-        position: absolute;
-        content: '';
-        width: 100%;
-        height: 1px;
-        left: 0;
-        bottom: 0;
-        margin-bottom: -1px;
-        background: #e5e4e1;
-        z-index: 2
-    }
-    .post-nav-next .post-nav-teaser {
-        padding-right: 0;
-        padding-left: 1.5em
-    }
-    .post-nav-prev .post-nav-teaser {
-        padding-left: 0;
-        padding-right: 1.5em
-    }
-    .post-nav-next i {
-        margin-left: -1em
-    }
-    .post-nav-prev i {
-        margin-right: -1em
-    }
-    blockquote::before{
-        right: 90%;
-    }
-    blockquote::after{
-        left: 90%
-    }
-    .toc-nav {
-        display: none;
-    }
-    .credits-theme,
-    .credits-software {
-        float: none;
-        text-align: center;
-    }
-    .credits-software {
-        margin-top: 20px;
-    }
-    .menu-active #wrapper,
-    .menu-active #blog-header,
-    .menu-active #post-header {
-        padding-right: inherit
+    pre code,
+    pre tt {
+        font-size: 0.9em;
     }
 }
-
 
 @media only screen and (max-width: 1000px) and (orientation: portrait){
     .container {
@@ -2349,6 +2260,117 @@ i.fa.fa-map-marker.fa-stack-1x {
     .menu-active #blog-header,
     .menu-active #post-header {
         padding-right: inherit
+    }
+}
+
+@media only screen and (max-width: 400px) and (orientation: portrait){
+    html {
+        font-size: 52.5%;
+    }
+    .container {
+        padding-top: 0;
+    }
+    #index .inner {
+        padding: 0 5%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .inner {
+        padding: 0 5%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .post-content,
+    .post-tags,
+    .post-author {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .post-template #main-header {
+        padding: 16px 0
+    }
+    #main-nav a {
+        margin: 16px
+    }
+    .post-author-avatar {
+        margin: -0.25em 0 0 0.5em
+    }
+    .container .post.featured .post-title:after {
+        left: 0;
+        top: -1.75em
+    }
+    .post-content img,
+    .post-content .fluid-width-video-wrapper {
+        width: 90%;
+        margin-left: auto
+    }
+    .post-nav:after {
+        display: none
+    }
+    .post-nav-next,
+    .post-nav-prev {
+        display: block;
+        width: 100%
+    }
+    .post-nav-teaser {
+        position: relative;
+        min-height: 4em;
+        padding: 2em 0
+    }
+    .post-nav-next .post-nav-teaser:after {
+        position: absolute;
+        content: '';
+        width: 100%;
+        height: 1px;
+        left: 0;
+        bottom: 0;
+        margin-bottom: -1px;
+        background: #e5e4e1;
+        z-index: 2
+    }
+    .post-nav-next .post-nav-teaser {
+        padding-right: 0;
+        padding-left: 1.5em
+    }
+    .post-nav-prev .post-nav-teaser {
+        padding-left: 0;
+        padding-right: 1.5em
+    }
+    .post-nav-next i {
+        margin-left: -1em
+    }
+    .post-nav-prev i {
+        margin-right: -1em
+    }
+    blockquote::before{
+        right: 90%;
+    }
+    blockquote::after{
+        left: 90%
+    }
+    .toc-nav {
+        display: none;
+    }
+    .credits-theme,
+    .credits-software {
+        float: none;
+        text-align: center;
+    }
+    .credits-software {
+        margin-top: 20px;
+    }
+    .menu-active #wrapper,
+    .menu-active #blog-header,
+    .menu-active #post-header {
+        padding-right: inherit
+    }
+    .intro {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    pre code,
+    pre tt {
+        font-size: 0.9em;
     }
 }
 

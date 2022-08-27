@@ -74,6 +74,18 @@
           <section class="post-content">
               {{page.content}}
           </section>
+
+          <div class="clear"></div>
+
+          <div id="waline"></div>
+          <script>
+            Waline.init({
+              el: '#waline',
+              serverURL: 'https://j5b7t4.deta.dev/',
+              emoji: false,
+              imageUploader: false,
+            });
+          </script>
       </div>
       </article>
   </main>
