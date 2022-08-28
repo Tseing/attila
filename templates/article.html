@@ -222,7 +222,7 @@
                         <section class="post-nav-teaser">
                             <i class="ic ic-arrow-left"></i>
                                 <h2 class="post-nav-title">{{ article.next_article.title }}</h2>
-                            <p class="post-nav-excerpt">{{ article.next_article.summary|striptags|truncate(90) }}</p>
+                            <p class="post-nav-excerpt">{{ article.next_article.summary|striptags|truncate(50) }}</p>
                         </section>
                     </a>
                     {% endif %}
@@ -231,7 +231,7 @@
                         <section class="post-nav-teaser">
                             <i class="ic ic-arrow-right"></i>
                                 <h2 class="post-nav-title">{{ article.prev_article.title }}</h2>
-                            <p class="post-nav-excerpt">{{ article.prev_article.summary|striptags|truncate(90) }}</p>
+                            <p class="post-nav-excerpt">{{ article.prev_article.summary|striptags|truncate(50) }}</p>
                         </section>
                     </a>
                     {% endif %}
