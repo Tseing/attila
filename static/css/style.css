@@ -316,7 +316,7 @@ th {
     src: local("Ubuntu Mono"), url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
 } */
 
-@font-face {
+/* @font-face {
     font-family: 'Cardo';
     font-style: normal;
     font-weight: 400;
@@ -356,7 +356,7 @@ th {
     font-style: normal;
     font-weight: 700;
     src: local("Fira Sans Bold"), local("FiraSans-Bold"), url("//fonts.gstatic.com/s/firasans/v5/DugPdSljmOTocZOR2CItOhampu5_7CjHW5spxoeN3Vs.woff2") format("woff2"), url("//fonts.gstatic.com/s/firasans/v5/DugPdSljmOTocZOR2CItOqRDOzjiPcYnFooOUGCOsRk.woff") format("woff")
-}
+} */
 
 .hljs {
     display: block;
@@ -558,7 +558,7 @@ h3 {
 h4 {
     font-size: 1.25em;
     line-height: 1.2em;
-    margin: 2.4em 0 0em
+    margin: 1em 0 0em
 }
 
 h1 a,
@@ -1628,16 +1628,6 @@ img {
     margin-right: auto;
 }
 
-.intro {
-    font-style: italic;
-    margin-left: 10%;
-    margin-left: 10%;
-    margin-top: -20px;
-    font-size: 90%;
-    opacity: 0.8;
-    text-align: left;
-}
-
 .post-content .fluid-width-video-wrapper {
     max-width: none;
     width: 110%;
@@ -2344,10 +2334,6 @@ img {
     .menu-active #blog-header,
     .menu-active #post-header {
         padding-right: inherit
-    }
-    .intro {
-        margin-left: 5%;
-        margin-right: 5%;
     }
     pre code,
     pre tt {
