@@ -130,7 +130,7 @@ code,
 kbd,
 pre,
 samp {
-    font-family: "Ubuntu Mono", monospace, monospace;
+    font-family: "Fira Mono", monospace, monospace;
     font-size: 18px
 }
 
@@ -307,14 +307,15 @@ th {
     font-style: normal;
     font-weight: 400;
     src: local("Noto Serif SC"), url("https://fonts.googleapis.com/css2?family=Noto+Serif+SC&display=swap");
-}
+} */
 
-@font-face {
+/* @font-face {
     font-family: 'Ubuntu Mono';
     font-style: normal;
+    font-display: swap;
     font-weight: 400;
-    src: local("Ubuntu Mono"), url("https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap");
-} */
+    src: url('https://cdn.jsdelivr.net/npm/@openfonts/ubuntu-mono_all@1.44.2/files/ubuntu-mono-all-400.woff2') format('woff2');
+  } */
 
 /* @font-face {
     font-family: 'Cardo';
@@ -636,7 +637,7 @@ ul ul,
 ul ol,
 ol ul {
     padding-left: 30px;
-    margin: 15px 0
+    margin: 0
 }
 
 hr {
@@ -692,11 +693,10 @@ blockquote::after {
     opacity: 0.7;
 }
 
-em {
-    font-style: normal;
-    text-emphasis: dot;
-    text-emphasis-color: #B6321C;
-    text-emphasis-position: under right;
+em,
+i {
+    font-style: italic;
+
 }
 
 em,

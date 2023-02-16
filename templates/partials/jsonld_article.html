@@ -12,7 +12,7 @@
         {% set default_cover = SITEURL+"/"+article.cover %}
     {% endif %}
 {% elif HEADER_COVER %}
-  {% set default_cover = SITEURL+"/"+HEADER_COVER %}
+  {% set default_cover = HEADER_COVER %}
 {% else %}
   {% set default_cover = SITEURL+"/"+THEME_STATIC_DIR+"/images/post-bg.jpg" %}
 {% endif %}
