@@ -80,7 +80,7 @@
   <!-- awesome-font icon -->
   <link href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
   <!-- umami analytics -->
-  <!-- <script async defer src="https://analytics.umami.is/script.js" data-website-id="b508982a-f7bf-4c24-a948-8de93b0cb81d"></script> -->
+  <script async defer src="https://analytics.umami.is/script.js" data-website-id="b508982a-f7bf-4c24-a948-8de93b0cb81d"></script>
   {% endblock head %}
   <!-- waline comment -->
   <link href="https://unpkg.com/@waline/client@v2/dist/waline.css" rel="stylesheet" />
@@ -99,6 +99,20 @@
       <!-- TODO : Body class -->
     <div id="body-class" style="display: none;" class="{{body_class}}"></div>
 
+    <div id="search-wrapper" style="display: none;">
+      <a class="search-close">
+        <i class="fa fa-close"></i>
+      </a>
+      <div class="search">
+        <div class="search-form">
+          <input class="input-field" data-stork="sitesearch" />
+        </div>
+        <div class="search-result">
+          <div data-stork="sitesearch-output"></div>
+        </div>
+      </div>>
+		</div>
+
     <footer id="footer">
       <div class="inner">
         <section class="credits">
@@ -106,15 +120,15 @@
             {% if SHOW_CREDITS and SHOW_CREDITS.left %}
               {% set left=SHOW_CREDITS.left %}
             {% else %}
-              {% set left='<a href="https://github.com/Tseing/Pelican_blog" rel="nofollow"><i class="fa fa-github fa-fw"></i><b>Source</b></a> &bull;
-               <a href="https://leonis.cc/feed.xml" rel="nofollow"><i class="fa fa-rss fa-fw"></i><b>Atom</b></a> &bull;
+              {% set left='<a rel="noopener" target="_blank" href="https://github.com/Tseing/Pelican_blog"><i class="fa fa-github fa-fw"></i><b>Source</b></a> &bull;
+               <a href="https://leonis.cc/feed.xml"><i class="fa fa-rss fa-fw"></i><b>Atom</b></a> &bull;
                <a href= "https://leonis.cc/sitemap.xml"><i class="fa fa-sitemap fa-fw"></i><b>Sitemap</b></a>' %}
             {% endif %}
 
             {% if SHOW_CREDITS and SHOW_CREDITS.right %}
               {% set right=SHOW_CREDITS.right %}
             {% else %}
-              {% set right='Theme <a href="https://github.com/arulrajnet/attila" rel="nofollow"><b>Attila</b></a> &bull; Published with <a href="https://github.com/getpelican/pelican" rel="nofollow"><b>Pelican</b></a>' %}
+              {% set right='Theme <a rel="noopener" target="_blank" href="https://github.com/arulrajnet/attila"><b>Attila</b></a> &bull; Published with <a rel="noopener" target="_blank" href="https://github.com/getpelican/pelican"><b>Pelican</b></a>' %}
             {% endif %}
 
           <span class="credits-theme">{{left}}</span>
@@ -124,9 +138,13 @@
       </div>
     </footer>
   </section>
-
   <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/script.js"></script>
+  <!-- pelican search -->
+  <script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
+  <script>
+      stork.register("sitesearch", "{{ SITEURL }}/search-index.st")
+  </script>
   <!-- code highlight -->
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
   <script>hljs.highlightAll();</script>

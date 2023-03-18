@@ -44,6 +44,9 @@
             <img src="https://img.foreverblog.cn/wormhole_2_tp.gif" alt="Wormhole">
           </a> -->
           </span>
+          <span id="search-button" class="nav-button">
+            <a class="search-button"><i class="fa fa-search fa-lg"></i></a>
+          </span>
           <span id="menu-button" class="nav-button">
             <a class="menu-button"><i class="ic ic-menu"></i> Menu</a>
           </span>
@@ -56,7 +59,7 @@
         {% if selected_cover %}
           <div class="blog-cover cover" style="background-image: url('{{ selected_cover }}')">
         {% elif selected_color %}
-          <div class="blog-cover cover" style="background-color: {{ selected_color }}">
+          <div class="blog-cover cover" style="background-color: url('{{ selected_cover }}')">
         {% endif %}
       </div>
     </header>
