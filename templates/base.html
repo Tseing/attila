@@ -82,9 +82,6 @@
   <!-- umami analytics -->
   <script async defer src="https://analytics.umami.is/script.js" data-website-id="b508982a-f7bf-4c24-a948-8de93b0cb81d"></script>
   {% endblock head %}
-  <!-- waline comment -->
-  <link href="https://unpkg.com/@waline/client@v2/dist/waline.css" rel="stylesheet" />
-  <script src="https://unpkg.com/@waline/client@v2/dist/waline.js"></script>
 </head>
 <!-- TODO : Body class -->
 <body class="home-template">
@@ -140,13 +137,8 @@
   </section>
   <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/script.js"></script>
-  <!-- pelican search -->
-  <script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
-  <script>
-      stork.register("sitesearch", "{{ SITEURL }}/search-index.st")
-  </script>
   <!-- code highlight -->
-  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
+  <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/highlight.js/11.4.0/highlight.min.js"></script>
   <script>hljs.highlightAll();</script>
   <!-- lightbox -->
   <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/lightgallery.min.js"></script>
@@ -172,5 +164,6 @@
   {% endif %}
   {% include 'partials/analytics.js' %}
   {% include 'partials/disqus.js' %}
+  {% block index_js %}{% endblock index_js %}
 </body>
 </html>
