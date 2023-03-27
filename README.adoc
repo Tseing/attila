@@ -55,7 +55,6 @@ https://github.com/getpelican/pelican-plugins/tree/master/neighbors[plugin])
 * Sharing buttons
 * Open Graph
 * Rich Snippets (JSON-LD)
-* link:#code-highlights[Multiple Code Highlight Styles]
 
 [[configuration]]
 == Configurations
@@ -212,25 +211,6 @@ the `rss` or `rss-square` or `feed` icons. A `<link>` tag for the
 external feed will be placed in `<head>` instead of the default Pelican
 feeds.
 
-[[code-highlights]]
-=== Code highlights
-
-This theme contains this color schemes:
-
-* Tomorrow - `tomorrow.css`;
-* Tomorrow Night - `tomorrow_night.css`;
-* Monokai - `monokai.css`;
-* Github (Default) - `github.css`;
-* Darkly - `darkly.css`;
-
-To customize, define `COLOR_SCHEME_CSS` in `pelicanconf.py` with css
-filename. Example:
-
-[source,python]
-----
-COLOR_SCHEME_CSS = 'monokai.css'
-----
-
 [[user-defined-css]]
 === User defined CSS
 
@@ -349,14 +329,13 @@ attila and start a new theme.
 
 Did you liked this theme? Pay my bills and support new features.
 
-https://gratipay.com/~arulrajnet/[image:https://img.shields.io/gratipay/user/arulrajnet.svg?maxAge=2592000[Gratipay]]
-
-https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=XYLX6LG2THL2J[image:https://img.shields.io/badge/paypal-donate-yellow.svg?maxAge=2592000[PayPal]]
+https://github.com/sponsors/arulrajnet/[image:https://img.shields.io/github/sponsors/arulrajnet?style=for-the-badge[GitHub Sponsors]]
 
 [[copyright-license]]
 == Copyright & License
 
 Copyright (c) 2015-2016 Peter Amende - Released under The MIT License.
+
 Copyright (c) 2016 Arulraj V - Released under The MIT License.
 
 Some background images used from
