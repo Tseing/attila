@@ -45,7 +45,7 @@
           </a> -->
           </span>
           <span id="search-button" class="nav-button">
-            <a class="search-button">
+            <a class="search-button" href="{{ SITEURL }}/search.html" target="_blank" rel="noopener">
               <i class="ic ic-search" aria-hidden="true"></i>
             </a>
           </span>
@@ -78,9 +78,3 @@
   </main>
 </div>
 {% endblock content %}
-
-{% block index_js %}
-<script>
-    stork.register("storksearch", "{{ SITEURL }}/search-index.st")
-</script>
-{% endblock index_js %}
