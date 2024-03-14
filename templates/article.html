@@ -182,6 +182,9 @@
                         {% if AUTHORS_BIO[author.name.lower()].facebook %}
                             <span class="post-author-facebook"><a rel="noopener" target="_blank" href="https://facebook.com/{{AUTHORS_BIO[author.name.lower()].facebook}}"><i class="ic ic-facebook"></i> Facebook</a></span>
                         {% endif %}
+                        {% if AUTHORS_BIO[author.name.lower()].mastodon %}
+                            <span class="post-author-mastodon"><a rel="noopener" target="_blank" href="{{AUTHORS_BIO[author.name.lower()].mastodon[1]}}"><i class="fa-brands fa-mastodon fa-fw"></i></i> {{AUTHORS_BIO[author.name.lower()].mastodon[0]}}</a></span>
+                        {% endif %}
                         {% if AUTHORS_BIO[author.name.lower()].github %}
                             <span class="post-author-github"><a rel="noopener" target="_blank" href="https://github.com/{{AUTHORS_BIO[author.name.lower()].github}}"><i class="ic ic-github"></i> GitHub</a></span>
                         {% endif %}
