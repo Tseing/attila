@@ -932,7 +932,7 @@ img {
 }
 
 .blog-logo {
-    position: fixed;
+    position: absolute;
     display: inline-flex;
     left: 0;
     top: 0;
@@ -2068,9 +2068,6 @@ img {
     html {
         font-size: 50%;
     }
-    .blog-logo {
-        position: absolute;
-    }
     .container {
         padding-top: 0;
     }
@@ -2122,9 +2119,6 @@ img {
 }
 
 @media only screen and (max-width: 1000px) and (orientation: portrait){
-    .blog-logo {
-        position: absolute;
-    }
     .container {
         padding-top: 0;
     }
@@ -2231,9 +2225,6 @@ img {
 @media only screen and (max-width: 400px){
     html {
         font-size: 52.5%;
-    }
-    .blog-logo {
-        position: absolute;
     }
     .container {
         padding-top: 0;
