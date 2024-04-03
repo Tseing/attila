@@ -2,13 +2,7 @@
 
 {% block title %}{{ SITENAME }} - Tags{% endblock %}
 
-{% if HOME_COVER %}
-  {% if HOME_COVER|lower|truncate(4, True, '') == "http" %}
-    {% set selected_cover = HOME_COVER %}
-  {% else %}
-    {% set selected_cover = SITEURL+"/"+HOME_COVER %}
-  {% endif %}
-{% elif HEADER_COVER %}
+{% if HEADER_COVER %}
   {% if HEADER_COVER|lower|truncate(4, True, '') == "http" %}
     {% set selected_cover = HEADER_COVER %}
   {% else %}
@@ -24,38 +18,27 @@
   {% set selected_color = HEADER_COLOR %}
 {% endif %}
 
-{% block canonical_url %}<link href="{{ SITEURL }}/{{ TAGS_SAVE_AS }}" rel="canonical" />{% endblock canonical_url %}
+{% block canonical_url %}<link href="{{ SITEURL }}/{{ TAGS_URL }}" rel="canonical" />{% endblock canonical_url %}
+
+{% if tags %}
+{% set body_class='tags-template' %}
+{% set current_url=TAGS_URL %}
+{% set current_title=SITENAME+' - Tags' %}
+{% set current_display_title='Tags' %}
+{% endif %}
 
 {% block header %}
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header id="blog-header" {% if selected_cover or selected_color %}class="has-cover"{% endif %}>
+    <header class="blog-header {% if selected_cover or selected_color %} has-cover {% endif %}">
       <div class="inner">
-        <nav id="navigation">
-          {% if SITE_LOGO %}
-            <span class="blog-logo">
-                <a href="{{ SITEURL }}/"><img src="{{SITE_LOGO}}" alt="Blog Logo" /></a>
-            </span>
-          {% else %}
-            <span id="home-button" class="nav-button">
-                <a class="home-button" href="{{ SITEURL }}/" aria-label="Home" title="Home">
-                  <i class="ic ic-arrow-left" aria-hidden="true"></i>
-                  <span>Home</span>
-                </a>
-            </span>
-          {% endif %}
-          <span id="menu-button" class="nav-button">
-            <a class="menu-button" aria-label="Menu">
-              <i class="ic ic-menu" aria-hidden="true"></i>
-              <span>Menu</span>
-            </a>
-          </span>
-        </nav>
-        <h1 class="post-title"><i class="fa-solid fa-tags"></i> Tags</h1>
+        <h1 class="post-title">{{ current_display_title }}</h1>
         {% if selected_cover %}
-          <div class="blog-cover cover" style="background-image: url('{{ selected_cover }}')">
+          <div class="post-cover cover">
+            <img src="{{ selected_cover }}" alt="{{ current_title }}" />
+          </div>
         {% elif selected_color %}
-          <div class="blog-cover cover" style="background-color: {{ selected_color }}">
+          <div class="post-cover cover" style="background-color: {{ selected_color }}">
         {% endif %}
       </div>
     </header>
@@ -68,8 +51,8 @@
     <div class="inner tag-cloud">
       {% for tag, articles in tags|sort %}
         {% set count = articles|count %}
-        <div class="tag">
-          <a href="{{ SITEURL }}/{{ tag.url }}" title="{{ count }} article(s) tagged '{{ tag }}'">{{ tag }} ({{ count }}) </a>
+        <div class="tag tag-weight-{{ (count/(max_count/steps))|int + 1 }}">
+          <a href="{{ SITEURL }}/{{ tag.url }}" title="{{ count }} article(s) tagged '{{ tag }}'">{{ tag }}</a>
         </div>
       {% endfor %}
     </div>

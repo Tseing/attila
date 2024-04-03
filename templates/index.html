@@ -6,18 +6,17 @@
     {% include 'partials/jsonld.html' %}
 {% endblock %}
 
-
-{% if HOME_COVER %}
-  {% if HOME_COVER|lower|truncate(4, True, '') == "http" %}
-    {% set selected_cover = HOME_COVER %}
-  {% else %}
-    {% set selected_cover = SITEURL+"/"+HOME_COVER %}
-  {% endif %}
-{% elif HEADER_COVER %}
+{% if HEADER_COVER %}
   {% if HEADER_COVER|lower|truncate(4, True, '') == "http" %}
     {% set selected_cover = HEADER_COVER %}
   {% else %}
     {% set selected_cover = SITEURL+"/"+HEADER_COVER %}
+  {% endif %}
+{% elif HOME_COVER %}
+  {% if HOME_COVER|lower|truncate(4, True, '') == "http" %}
+    {% set selected_cover = HOME_COVER %}
+  {% else %}
+    {% set selected_cover = SITEURL+"/"+HOME_COVER %}
   {% endif %}
 {% elif HEADER_COLOR %}
   {% set selected_color = HEADER_COLOR %}
@@ -28,43 +27,21 @@
 {% block header %}
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header id="blog-header" {% if selected_cover or selected_color %}class="has-cover"{% endif %}>
+    <header class="blog-header {% if selected_cover or selected_color %} has-cover {% endif %}">
       <div class="inner">
-        <nav id="navigation">
-          <!-- {% if SITE_LOGO %}
-          <span class="blog-logo">
-            <a href="{{ SITEURL }}/"><img src="{{SITE_LOGO}}" alt="Blog Logo" /></a>
-          </span>
-          {% endif %} -->
-          <span class="blog-logo">
-          <a href="https://www.travellings.cn/go.html" target="_blank" rel="noopener" title="开往-友链接力">
-            <img src="https://www.travellings.cn/assets/w.png" alt="Travelling">
-          </a>
-          <a href="https://www.foreverblog.cn/go.html" target="_blank" rel="noopener" title="穿梭虫洞-随机访问十年之约友链博客">
-            <img src="https://img.foreverblog.cn/wormhole_2_tp.gif" alt="Wormhole">
-          </a>
-          </span>
-          <span id="search-button" class="nav-button">
-            <a class="search-button" href="{{ SITEURL }}/search.html" target="_blank" rel="noopener">
-              <i class="ic ic-search" aria-hidden="true"></i>
-            </a>
-          </span>
-          <span id="menu-button" class="nav-button">
-            <a class="menu-button" aria-label="Menu">
-              <i class="ic ic-menu" aria-hidden="true"></i>
-              <span>Menu</span>
-            </a>
-          </span>
-        </nav>
-        <h1 class="blog-name"><a href="{{ SITEURL }}/">{{ SITENAME }}</a></h1>
-        {% if SITESUBTITLE %}
-        <span class="blog-description">{{ SITESUBTITLE }}</span>
-        {% endif %}
+        <div class="box blog-box">
+          <h1 class="blog-name">{{ SITENAME }}</h1>
+          {% if SITESUBTITLE %}
+          <span class="blog-description">{{ SITESUBTITLE }}</span>
+          {% endif %}
+        </div>
 
         {% if selected_cover %}
-          <div class="blog-cover cover" style="background-image: url('{{ selected_cover }}')">
+          <div class="blog-cover cover">
+            <img src="{{ selected_cover }}" alt="{{current_title}}" />
+          </div>
         {% elif selected_color %}
-          <div class="blog-cover cover" style="background-color: url('{{ selected_cover }}')">
+          <div class="blog-cover cover" style="background-color: {{ selected_color }}">
         {% endif %}
       </div>
     </header>
@@ -72,6 +49,7 @@
 {% endblock header %}
 
 {% block content %}
+
 <div id="index" class="container">
   <main class="content" role="main">
     {% include "partials/loop.html" %}

@@ -12,7 +12,7 @@
         {% set default_cover = SITEURL+"/"+article.cover %}
     {% endif %}
 {% elif HEADER_COVER %}
-  {% set default_cover = HEADER_COVER %}
+  {% set default_cover = SITEURL+"/"+HEADER_COVER %}
 {% else %}
   {% set default_cover = SITEURL+"/"+THEME_STATIC_DIR+"/images/post-bg.jpg" %}
 {% endif %}
@@ -33,7 +33,7 @@
   "dateModified": "{{ article.modified }}",
   "author": {
     "@type": "Person",
-    "name": "{{ article.author.name }}",
+    "name": "{{ article.author.name | title }}",
     "url": "{{ SITEURL }}/{{ article.author.url }}"
   },
   "image": "{{ default_cover }}",
@@ -41,7 +41,3 @@
   "description": "{{ description }}"
 }
 </script>
-
-<!-- waline comment -->
-<link href="https://npm.elemecdn.com/@waline/client@2.14.9/dist/waline.css" rel="stylesheet" />
-<script src="https://npm.elemecdn.com/@waline/client@2.14.9/dist/waline.js"></script>
