@@ -94,6 +94,25 @@
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css" />
   {% endif %}
 
+  <!-- font-awesome icons -->
+  <link href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+  <!-- Custom fonts -->
+  <link href="https://ik.imagekit.io/leonis/ChiuKongGothic-CL-w4/result.css?updatedAt=1700222744424" rel="stylesheet" />
+  <link href="https://ik.imagekit.io/leonis/ChiuKongGothic-CL-w5/result.css?updatedAt=1700275749020" rel="stylesheet" />
+  <link href="https://ik.imagekit.io/leonis/ChiuKongGothic-CL-w7/result.css?updatedAt=1700275854743" rel="stylesheet" />
+  <link href="https://cdnjs.loli.net/ajax/libs/fontsource-fira-sans/5.0.19/400.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.loli.net/ajax/libs/fontsource-fira-sans/5.0.19/400-italic.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.loli.net/ajax/libs/fontsource-fira-sans/5.0.19/500.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.loli.net/ajax/libs/fontsource-fira-sans/5.0.19/500-italic.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.loli.net/ajax/libs/fontsource-fira-sans/5.0.19/700.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.loli.net/ajax/libs/fontsource-fira-sans/5.0.19/700-italic.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.loli.net/ajax/libs/fontsource-mononoki/5.0.7/400.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.loli.net/ajax/libs/fontsource-mononoki/5.0.7/400-italic.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.loli.net/ajax/libs/fontsource-mononoki/5.0.7/700.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.loli.net/ajax/libs/fontsource-mononoki/5.0.7/700-italic.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.loli.net/ajax/libs/fontsource-lato/5.0.19/400.min.css" rel="stylesheet" />
+  <link href="https://ik.imagekit.io/leonis/AdvocateAncientSerifSC-Bold/result.css?updatedAt=1700289637334" rel="stylesheet" />
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -238,10 +257,29 @@
 
   </section>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script src="https://cdnjs.loli.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <!-- code highlight -->
+  <script src="https://cdnjs.loli.net/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script src="https://cdnjs.loli.net/ajax/libs/highlight.js/11.7.0/languages/django.min.js"></script>
+  <script src="https://cdnjs.loli.net/ajax/libs/highlight.js/11.7.0/languages/dockerfile.min.js"></script>
+  <script src="https://cdnjs.loli.net/ajax/libs/highlight.js/11.7.0/languages/markdown.min.js"></script>
+  <script src="https://cdnjs.loli.net/ajax/libs/highlight.js/11.7.0/languages/nginx.min.js"></script>
   <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/jquery.fitvids.js"></script>
   <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/script.js"></script>
+
+  <!-- lightbox -->
+  <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/lightgallery.min.js"></script>
+  <script type="text/javascript" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/lg-zoom.min.js"></script>
+  <script>
+    var elements = document.getElementsByClassName("lightgallery");
+    for(var i=0; i<elements.length; i++) {
+       lightGallery(elements[i]);
+    }
+  </script>
+  {% if UMAMI_STATISTIC %}
+    <!-- umami analytics -->
+    <script async defer src="https://analytics.umami.is/script.js" data-website-id="{{ UMAMI_WEB_ID }}"></script>
+  {% endif %}
 
   {% if JS_OVERRIDE %}
   <!-- Script specified by the user -->

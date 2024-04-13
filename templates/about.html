@@ -1,69 +1,65 @@
-{% extends "base.html" %}
+{% set about_pages = hidden_pages|selectattr("set_as_about_page")|list %}
+{% if about_pages %}
+  {% set page = about_pages.0 %}
+  {% set body_class='page-template' %}
+  {% set current_url = "/about.html" %}
+  {% set current_title = "About" %}
+  {% extends "base.html" %}
 
-{% block title %}{{ SITENAME }} - Articles by {{ author_name }}{% endblock %}
+  {% block title %}{{ page.title }}{% endblock title %}
+  {% block canonical_url %}<link href="{{ SITEURL }}/about.html" rel="canonical" />{% endblock canonical_url %}
 
-<!-- To support both image in relative path and url  -->
-{% set author_name = author.name | title  %}
-{% if AUTHOR_META and author.name.lower() in AUTHOR_META %}
-  {% set author_avatar = AUTHOR_META[author.name.lower()].image %}
-  {% if author_avatar %}
-    {% if author_avatar|lower|truncate(4, True, '') == "http" %}
-      {% set selected_avatar = author_avatar %}
-    {% else %}
-      {% set selected_avatar = SITEURL+"/"+author_avatar %}
+  <!-- To support both image in relative path and url  -->
+  {% set author = page.author %}
+  {% set author_name = author.name | title  %}
+  {% if AUTHOR_META and author.name.lower() in AUTHOR_META %}
+    {% set author_avatar = AUTHOR_META[author.name.lower()].image %}
+    {% if author_avatar %}
+      {% if author_avatar|lower|truncate(4, True, '') == "http" %}
+        {% set selected_avatar = author_avatar %}
+      {% else %}
+        {% set selected_avatar = SITEURL+"/"+author_avatar %}
+      {% endif %}
     {% endif %}
   {% endif %}
 
-  {% set author_cover = AUTHOR_META[author.name.lower()].cover %}
-  {% set author_color = AUTHOR_META[author.name.lower()].color %}
-  {% if author_cover %}
-    {% if author_cover|lower|truncate(4, True, '') == "http" %}
-      {% set selected_cover = author_cover %}
+  {# <!-- Choosing cover image --> #}
+  {% if page.cover %}
+    {% if page.cover|lower|truncate(4, True, '') == "http" %}
+      {% set selected_cover = page.cover %}
     {% else %}
-      {% set selected_cover = SITEURL+"/"+author_cover %}
+      {% set selected_cover = SITEURL+"/"+page.cover %}
     {% endif %}
-  {% elif author_color %}
-    {% set selected_color = author_color %}
+  {% elif page.og_image %}
+    {% if page.og_image|lower|truncate(4, True, '') == "http" %}
+      {% set selected_cover = page.og_image %}
+    {% else %}
+      {% set selected_cover = SITEURL+"/"+page.og_image %}
+    {% endif %}
+  {% elif HEADER_COVER %}
+    {% if HEADER_COVER|lower|truncate(4, True, '') == "http" %}
+      {% set selected_cover = HEADER_COVER %}
+    {% else %}
+      {% set selected_cover = SITEURL+"/"+HEADER_COVER %}
+    {% endif %}
+  {% elif HOME_COVER %}
+    {% if HOME_COVER|lower|truncate(4, True, '') == "http" %}
+      {% set selected_cover = HOME_COVER %}
+    {% else %}
+      {% set selected_cover = SITEURL+"/"+HOME_COVER %}
+    {% endif %}
+  {% elif page.color %}
+    {% set selected_color = page.color %}
+  {% elif HEADER_COLOR %}
+    {% set selected_color = HEADER_COLOR %}
   {% endif %}
 
-  {% set author_name = AUTHOR_META[author.name.lower()].name or author.name %}
-{% elif HEADER_COVER %}
-  {% if HEADER_COVER|lower|truncate(4, True, '') == "http" %}
-    {% set selected_cover = HEADER_COVER %}
-  {% else %}
-    {% set selected_cover = SITEURL+"/"+HEADER_COVER %}
-  {% endif %}
-{% elif HOME_COVER %}
-  {% if HOME_COVER|lower|truncate(4, True, '') == "http" %}
-    {% set selected_cover = HOME_COVER %}
-  {% else %}
-    {% set selected_cover = SITEURL+"/"+HOME_COVER %}
-  {% endif %}
-{% elif HEADER_COLOR %}
-  {% set selected_color = HEADER_COLOR %}
-{% endif %}
-
-{% block canonical_url %}<link href="{{ SITEURL }}/{{author.url}}" rel="canonical" />{% endblock canonical_url %}
-
-{% block opengraph %}
-    {{ super() }}
-    <meta property="og:title" content="{{ SITENAME }} - Articles by {{ author }}">
-    <meta property="og:type" content="profile">
-    <meta property="profile:first_name" content="{{ author.name.split(' ')[0] }}">
-    <meta property="profile:last_name" content="{{ author.name.split(' ')[1:]|join(' ') }}">
-    <meta property="profile:username" content="{{ author.slug }}">
-{% endblock opengraph %}
-
-{% block header %}
+  {% block header %}
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
     <header class="blog-header {% if selected_cover or selected_color %} has-cover{% endif %}">
       <div class="inner">
         <div class="archive archive-author box archive-box">
-          <span class="archive-info">
-            <span class="archive-type">{{"Author"}}</span>
-            <span class="archive-count">{{ articles|count }} {% if articles|count > 1 %} posts {% else %} post {% endif %}</span>
-          </span>
           <figure class="archive-avatar avatar">
             {% if selected_avatar %}
               <img src="{{selected_avatar}}" alt="{{author_name}}" />
@@ -73,7 +69,7 @@
           {% if AUTHOR_META and AUTHOR_META[author.name.lower()] and AUTHOR_META[author.name.lower()].bio %}
           <span class="archive-description">{{AUTHOR_META[author.name.lower()].bio}}</span>
           {% endif %}
-          <span class="archive-links">
+          <span class="about-page archive-links">
           {% if AUTHOR_META[author.name.lower()].location %}
             <span class="post-author-location">
               <a rel="noopener" target="_blank" href="{{AUTHOR_META[author.name.lower()].location.url}}"
@@ -149,13 +145,79 @@
         {% endif %}
       </div>
     </header>
-{% endblock header %}
+  {% endblock header %}
 
-{% block content %}
+  {% block content %}
+    <!-- Post content -->
+    <main class="content" role="main">
+        <article class="post">
+        <div class="inner">
+            <section class="post-content">
+                {{page.content}}
+            </section>
+            {% if WALINE_COMMENT %}<div id="waline"></div>{% endif %}
+        </div>
+        </article>
+    </main>
+  {% endblock content %}
 
-<div id="index" class="container">
-  <main class="content" role="main">
-    {% include "partials/loop.html" %}
-  </main>
-</div>
-{% endblock content %}
+  {% block scripts %}
+    {{ super() }}
+    {# waline comment #}
+    {% if WALINE_COMMENT %}
+    <link href="https://npm.elemecdn.com/@waline/client@2.14.9/dist/waline.css" rel="stylesheet" />
+    <script src="https://npm.elemecdn.com/@waline/client@2.14.9/dist/waline.js"></script>
+    {% endif %}
+    <script>
+      $(document).ready(function () {
+        var viewport = $(window);
+        var post = $('.post-content');
+        // Responsive videos with fitVids
+        post.fitVids();
+        // Format code blocks and add line numbers
+        function codestyling() {
+          $('pre code').each(function(i, e) {
+            // Code highlight
+            hljs.highlightElement(e);
+            // No lines for plain text blocks
+            if (!$(this).hasClass('language-text')) {
+              var code = $(this);
+              // Calculate amount of lines
+              var lines = code.html().split(/\n(?!$)/g).length;
+              var numbers = [];
+              if (lines > 1) {
+                lines++;
+              }
+              for (i = 1; i < lines; i++) {
+                numbers += '<span class="line" aria-hidden="true">' + i + '</span>';
+              }
+              code.parent().append('<div class="lines">' + numbers + '</div>');
+            }
+          });
+        }
+
+        // Format code blocks only
+        function codestylingWithoutLineNumbers() {
+          $("pre code").each(function(i, e) {
+            // Code highlight
+            hljs.highlightElement(e);
+          });
+        }
+
+        codestylingWithoutLineNumbers();
+      });
+
+      {% if WALINE_COMMENT and page.status != "draft" %}
+      Waline.init({
+          el: '#waline',
+          serverURL: "{{ WALINE_COMMENT.serverURL }}",
+          emoji: false,
+          search: false,
+          imageUploader: false,
+          locale: {placeholder: "{{ WALINE_COMMENT.locale.placeholder }}"},
+      });
+      {% endif %}
+    </script>
+  {% endblock %}
+
+{% endif %}

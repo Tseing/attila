@@ -53,7 +53,14 @@ jQuery(function($) {
         '-webkit-transform': 'translate3d(0, ' + coverPosition + 'px, 0)',
         'transform': 'translate3d(0, ' + coverPosition + 'px, 0)'
       });
-      (viewport.scrollTop() < cover.height()) ? html.addClass('cover-active'): html.removeClass('cover-active');
+      if (viewport.scrollTop() < cover.height()) {
+        html.addClass('cover-active');
+        html.removeClass('cover-inactive');
+      }
+      else {
+        html.removeClass('cover-active');
+        html.addClass('cover-inactive');
+      }
     }
   }
   prlx();
@@ -157,3 +164,31 @@ jQuery(function($) {
   }
   theme();
 });
+
+/* ==========================================================================
+Copy Info
+========================================================================== */
+function copyURL(event, url) {
+  navigator.clipboard.writeText(url);
+  popInfo(event, "URL Copied!");
+};
+
+function popInfo(event, info) {
+  var x = event.clientX;
+  var y = event.clientY;
+  popDiv = $("<div>", { class: 'pop-info', html: info });
+  popDiv.css({
+      'position':'fixed',
+      'left': x + 'px',
+      'top': y - 35 + 'px',
+  });
+  $('body').append(popDiv);
+  popDiv.animate(
+    {
+      top: y - 100 + 'px',
+      opacity: '0.1'
+    },
+    1200,
+    "swing",
+    function(){$(this).remove()});
+};

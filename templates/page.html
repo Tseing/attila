@@ -61,6 +61,7 @@
           <section class="post-content">
               {{page.content}}
           </section>
+          {% if WALINE_COMMENT %}<div id="waline"></div>{% endif %}
       </div>
       </article>
   </main>
@@ -99,7 +100,7 @@
 
     // Format code blocks only
     function codestylingWithoutLineNumbers() {
-      $(".highlight pre").each(function(i, e) {
+      $("pre code").each(function(i, e) {
         // Code highlight
         hljs.highlightElement(e);
       });
@@ -107,5 +108,16 @@
 
     codestylingWithoutLineNumbers();
   });
+
+  {% if WALINE_COMMENT and page.status != "draft" %}
+  Waline.init({
+      el: '#waline',
+      serverURL: "{{ WALINE_COMMENT.serverURL }}",
+      emoji: false,
+      search: false,
+      imageUploader: false,
+      locale: {placeholder: "{{ WALINE_COMMENT.locale.placeholder }}"},
+  });
+  {% endif %}
 </script>
 {% endblock %}

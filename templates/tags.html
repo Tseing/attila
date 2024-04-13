@@ -1,13 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}{{ SITENAME }} - Tags{% endblock %}
+
 {% if tags %}
 {% set body_class='tags-template' %}
 {% set current_url=TAGS_URL %}
 {% set current_title=SITENAME+' - Tags' %}
 {% set current_display_title='Tags' %}
 {% endif %}
-
-{% extends "base.html" %}
-
-{% block title %}{{ SITENAME }} - Tags{% endblock %}
 
 {% if HEADER_COVER %}
   {% if HEADER_COVER|lower|truncate(4, True, '') == "http" %}
@@ -51,8 +51,8 @@
     <div class="inner tag-cloud">
       {% for tag, articles in tags|sort %}
         {% set count = articles|count %}
-        <div class="tag tag-weight-{{ (count/(max_count/steps))|int + 1 }}">
-          <a href="{{ SITEURL }}/{{ tag.url }}" title="{{ count }} article(s) tagged '{{ tag }}'">{{ tag }}</a>
+        <div class="tag">
+          <a href="{{ SITEURL }}/{{ tag.url }}" title="{{ count }} article(s) tagged '{{ tag }}'">{{ tag }} ({{ count }}) </a>
         </div>
       {% endfor %}
     </div>

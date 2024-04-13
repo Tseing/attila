@@ -1,11 +1,11 @@
+{% extends "base.html" %}
+
 {% if dates %}
 {% set body_class='archives-template' %}
 {% set current_url=ARCHIVES_URL %}
 {% set current_title=SITENAME+' - Archives' %}
 {% set current_display_title='Archives' %}
 {% endif %}
-
-{% extends "base.html" %}
 
 {% block title %}{{ SITENAME }} - Archives{% endblock %}
 
@@ -46,7 +46,7 @@
 
 {% block content %}
   <article class="post">
-    <div class="inner">
+    <div class="inner archives">
       <section class="post-content">
         <dl>
         {% for article in dates %}

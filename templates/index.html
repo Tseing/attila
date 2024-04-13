@@ -6,17 +6,19 @@
     {% include 'partials/jsonld.html' %}
 {% endblock %}
 
-{% if HEADER_COVER %}
-  {% if HEADER_COVER|lower|truncate(4, True, '') == "http" %}
-    {% set selected_cover = HEADER_COVER %}
-  {% else %}
-    {% set selected_cover = SITEURL+"/"+HEADER_COVER %}
-  {% endif %}
+{% if selected_cover %}
+  {% set selected_cover = selected_cover %}
 {% elif HOME_COVER %}
   {% if HOME_COVER|lower|truncate(4, True, '') == "http" %}
     {% set selected_cover = HOME_COVER %}
   {% else %}
     {% set selected_cover = SITEURL+"/"+HOME_COVER %}
+  {% endif %}
+{% elif HEADER_COVER %}
+  {% if HEADER_COVER|lower|truncate(4, True, '') == "http" %}
+    {% set selected_cover = HEADER_COVER %}
+  {% else %}
+    {% set selected_cover = SITEURL+"/"+HEADER_COVER %}
   {% endif %}
 {% elif HEADER_COLOR %}
   {% set selected_color = HEADER_COLOR %}

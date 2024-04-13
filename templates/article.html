@@ -135,6 +135,11 @@
     <!-- Post content -->
     <main class="content" role="main">
         <article class="post">
+        {% if article.toc %}
+          <div class="toc-nav">
+            {{article.toc}}
+          </div>
+        {% endif %}
         <div class="inner">
           <section class="post-content">
             {{article.content}}
@@ -148,7 +153,36 @@
           <section class="post-footer" {{post_footer_inline_style}}>
             <div class="post-share">
               <span class="post-info-label">{{"Share"}}</span>
-              <a title="Twitter" aria-label="Twitter" class="twitter" href="https://twitter.com/share?text={{ article.title }}&amp;url={{ SITEURL }}/{{ article.url }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+              {% set share_content = article.title + " - " + SITENAME + " " + SITEURL + "/" + article.url %}
+              {% for name, title in SHARE_MEDIA if name.lower() in ['facebook', 'twitter', 'linkedin', 'email', 'share-link', 'weibo', 'mastodon'] %}
+                <a title="{{ title }}" aria-label="{{ name }}" class="{{ name.lower() }}"
+                {% if name.lower() == "share-link" %}
+                  href="#" onclick='copyURL(event, "{{share_content|escape}}");return false;'>
+                  <i class="icon icon-link"
+                {% elif name.lower() == "twitter" %}
+                  href="https://twitter.com/share?text={{ article.title }}&amp;url={{ SITEURL }}/{{ article.url }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
+                  <i class="icon icon-{{ name.lower() }}"
+                {% elif name.lower() == "facebook" %}
+                  href="https://www.facebook.com/sharer/sharer.php?u={{ SITEURL }}/{{ article.url }}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
+                  <i class="icon icon-{{ name.lower() }}"
+                {% elif name.lower() == "linkedin" %}
+                  href="https://www.linkedin.com/shareArticle?mini=true&amp;url={{ SITEURL }}/{{ article.url }}&amp;title={{ article.title }}" onclick="window.open(this.href, 'linkedin-share', 'width=930,height=720');return false;">
+                  <i class="icon icon-{{ name.lower() }}"
+                {% elif name.lower() == "email" %}
+                  href="mailto:?subject={{ article.title }}&amp;body={{ SITEURL }}/{{ article.url }}">
+                  <i class="icon icon-mail"
+                {% elif name.lower() == "mastodon" %}
+                  href="https://tootpick.org/#text={{share_content|escape}}" target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-mastodon"
+                {% elif name.lower() == "weibo" %}
+                  href="http://service.weibo.com/share/share.php?url={{ SITEURL }}/{{ article.url }}&title={{ article.title }}&nbsp;-&nbsp;{{ SITENAME }}"
+                  target="_blank" rel="noopener noreferrer">
+                  <i class="fa-brands fa-weibo"
+                {% endif %}
+                  aria-hidden="true"></i><span class="hidden">{{ name }}</span>
+                </a>
+              {% endfor %}
+              {# <a title="Twitter" aria-label="Twitter" class="twitter" href="https://twitter.com/share?text={{ article.title }}&amp;url={{ SITEURL }}/{{ article.url }}" onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;">
                 <i class="icon icon-twitter" aria-hidden="true"></i><span class="hidden">Twitter</span>
               </a>
               <a title="Facebook" aria-label="Facebook" class="facebook" href="https://www.facebook.com/sharer/sharer.php?u={{ SITEURL }}/{{ article.url }}" onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;">
@@ -159,13 +193,13 @@
               </a>
               <a title="Email" aria-label="Email" class="email" href="mailto:?subject={{ article.title }}&amp;body={{ SITEURL }}/{{ article.url }}">
                 <i class="icon icon-mail" aria-hidden="true"></i><span class="hidden">Email</span>
-              </a>
+              </a> #}
               <div class="clear"></div>
             </div>
 
             {% if article.tags %}
             <aside class="post-tags">
-              {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag | escape }}</a>{% if not loop.last %}{% endif %}{% endfor %}
+              {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}"># {{ tag | escape }}</a>{% if not loop.last %}{% endif %}{% endfor %}
             </aside>
             {% endif %}
 
@@ -193,26 +227,68 @@
                     <p class="post-author-about">{{AUTHOR_META[author.name.lower()].bio}}</p>
                   {% endif %}
                   {% if AUTHOR_META[author.name.lower()].location %}
-                    <span class="post-author-location"><i class="icon icon-location"></i> {{AUTHOR_META[author.name.lower()].location}}</span>
+                    <span class="post-author-location">
+                      <a rel="noopener" target="_blank" href="{{AUTHOR_META[author.name.lower()].location.url}}"
+                      title="{{AUTHOR_META[author.name.lower()].location.title}}">
+                      <i class="fa-solid fa-earth-asia fa-fw"></i></a>
+                    </span>
                   {% endif %}
                   {% if AUTHOR_META[author.name.lower()].website %}
-                    <span class="post-author-website"><a href="{{AUTHOR_META[author.name.lower()].website}}"><i class="icon icon-globe"></i> Website</a></span>
+                    <span class="post-author-website">
+                      <a rel="noopener" target="_blank" href="{{AUTHOR_META[author.name.lower()].website.url}}"
+                      title="{{AUTHOR_META[author.name.lower()].website.title}}">
+                        <i class="fa-solid fa-link fa-fw"></i></a>
+                    </span>
                   {% endif %}
                   <!-- Social linkes in alphabet order. -->
                   {% if AUTHOR_META[author.name.lower()].facebook %}
-                    <span class="post-author-facebook"><a target="_blank" href="https://facebook.com/{{AUTHOR_META[author.name.lower()].facebook}}"><i class="icon icon-facebook"></i> Facebook</a></span>
+                    <span class="post-author-facebook">
+                      <a rel="noopener" target="_blank" href="https://facebook.com/{{AUTHOR_META[author.name.lower()].facebook}}">
+                        <i class="fa-brands fa-facebook fa-fw"></i></a>
+                    </span>
+                  {% endif %}
+                  {% if AUTHOR_META[author.name.lower()].mastodon %}
+                    <span class="post-author-mastodon">
+                      <a rel="noopener" target="_blank" href="{{AUTHOR_META[author.name.lower()].mastodon.url}}"
+                      title="{{AUTHOR_META[author.name.lower()].mastodon.title}}">
+                        <i class="fa-brands fa-mastodon fa-fw"></i></a>
+                    </span>
                   {% endif %}
                   {% if AUTHOR_META[author.name.lower()].github %}
-                    <span class="post-author-github"><a target="_blank" href="https://github.com/{{AUTHOR_META[author.name.lower()].github}}"><i class="icon icon-github"></i> GitHub</a></span>
+                    <span class="post-author-github">
+                      <a rel="noopener" target="_blank" href="https://github.com/{{AUTHOR_META[author.name.lower()].github}}"
+                      title="@{{AUTHOR_META[author.name.lower()].github}}">
+                        <i class="fa-brands fa-github fa-fw"></i></a>
+                    </span>
                   {% endif %}
                   {% if AUTHOR_META[author.name.lower()].linkedin %}
-                    <span class="post-author-linkedin"><a target="_blank" href="https://www.linkedin.com/in/{{AUTHOR_META[author.name.lower()].linkedin}}"><i class="icon icon-linkedin"></i> LinkedIn</a></span>
+                    <span class="post-author-linkedin">
+                      <a rel="noopener" target="_blank" href="https://www.linkedin.com/in/{{AUTHOR_META[author.name.lower()].linkedin}}">
+                        <i class="fa-brands fa-linkedin fa-fw"></i></a>
+                    </span>
                   {% endif %}
                   {% if AUTHOR_META[author.name.lower()].twitter %}
-                    <span class="post-author-twitter"><a target="_blank" href="https://twitter.com/{{AUTHOR_META[author.name.lower()].twitter}}"><i class="icon icon-twitter"></i> Twitter</a></span>
+                    <span class="post-author-twitter">
+                      <a rel="noopener" target="_blank" href="https://twitter.com/{{AUTHOR_META[author.name.lower()].twitter}}">
+                        <i class="fa-brands fa-twitter fa-fw"></i></a>
+                    </span>
                   {% endif %}
                   {% if AUTHOR_META and AUTHOR_META[author.name.lower()] and AUTHOR_META[author.name.lower()].instagram %}
                   <a target="_blank" href="https://instagram.com/{{AUTHOR_META[author.name.lower()].instagram}}"><i class="icon icon-instagram"></i><span>Instagram</span></a>
+                  {% endif %}
+                  {% if AUTHOR_META[author.name.lower()].email %}
+                    <span class="post-author-email">
+                      <a rel="noopener" target="_blank" href="mailto:{{AUTHOR_META[author.name.lower()].email}}"
+                      title="{{AUTHOR_META[author.name.lower()].email}}">
+                        <i class="fa-solid fa-envelope fa-fw"></i></a>
+                    </span>
+                  {% endif %}
+                  {% if AUTHOR_META[author.name.lower()].rss %}
+                    <span class="post-author-rss">
+                      <a rel="noopener" target="_blank" href="{{AUTHOR_META[author.name.lower()].rss}}"
+                      title="RSS Feed">
+                        <i class="fa-solid fa-rss fa-fw"></i></a>
+                    </span>
                   {% endif %}
                 </div>
                 <div class="clear"></div>
@@ -269,6 +345,8 @@
             <div class="clear"></div>
           </aside>
 
+          {% if WALINE_COMMENT %}<div id="waline"></div>{% endif %}
+
         </div>
       </article>
     </main>
@@ -284,8 +362,8 @@
     // Responsive videos with fitVids
     post.fitVids();
 
-    var mdSelector=".highlight pre";
-    var rstSelector=".highlight pre";
+    var mdSelector="pre code";
+    var rstSelector="pre code";
     {% if article.source_path and article.source_path.lower().endswith(('.md','.markdown')) %}
     var selector=mdSelector;
     {% elif article.source_path and article.source_path.lower().endswith(('.rst','.rest')) %}
@@ -359,5 +437,16 @@
       });
     {% endif %}
   });
+
+  {% if WALINE_COMMENT and article.status != "draft" %}
+  Waline.init({
+      el: '#waline',
+      serverURL: "{{ WALINE_COMMENT.serverURL }}",
+      emoji: false,
+      search: false,
+      imageUploader: false,
+      locale: {placeholder: "{{ WALINE_COMMENT.locale.placeholder }}"},
+  });
+  {% endif %}
 </script>
 {% endblock %}

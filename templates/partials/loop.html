@@ -17,7 +17,6 @@
                 <h2 class="post-title"><a href="{{ SITEURL }}/{{ article.url }}" rel="bookmark" title="Permalink to {{ article.title|striptags }}">{{ article.title }}</a>
                 </h2>
                 <span class="post-meta">
-                    {{ "By " }}
                     {% for author in article.authors %}
                         {% set author_name = author.name | title %}
                         {% if AUTHOR_META and author.name.lower() in AUTHOR_META %}
@@ -25,11 +24,11 @@
                         {% endif %}
                         <a class="post-meta-tag" href="{{ SITEURL }}/{{ author.url }}">{{ author_name }}</a>
                     {% endfor %}
+                    {{ " | " }}<time datetime="{{ article.locale_date }}">{{ article.locale_date }}</time>
                     {% if primary_tag %}
-                    {{ " in " }}
+                    {{ " | Archived in " }}
                     <a class="post-meta-tag" href="{{ SITEURL }}/{{ primary_tag.url }}">{{ primary_tag | title }}</a>
                     {% endif %}
-                     {{ " on " }}<time datetime="{{ article.locale_date }}">{{ article.locale_date }}</time>
                 </span>
             {% if SHOW_FULL_ARTICLE_IN_SUMMARY|default(False) %}
                 <section class="post-content">
@@ -54,7 +53,7 @@
                     {% if SHOW_TAGS_IN_ARTICLE_SUMMARY|default(False) %}
                     {% if article.tags %}
                     <aside class="post-tags">
-                    {% for tag in article.tags[0:3] %}<a href="{{ SITEURL }}/{{ tag.url }}">{{ tag | escape }}</a>{% if not loop.last %}{% endif %}{% endfor %}
+                    {% for tag in article.tags %}<a href="{{ SITEURL }}/{{ tag.url }}"># {{ tag | escape }}</a>{% if not loop.last %}{% endif %}{% endfor %}
                     </aside>
                     {% endif %}
                     {% endif %}
