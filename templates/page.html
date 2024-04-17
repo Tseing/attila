@@ -19,12 +19,6 @@
   {% else %}
     {% set selected_cover = SITEURL+"/"+page.og_image %}
   {% endif %}
-{% elif HOME_COVER %}
-  {% if HOME_COVER|lower|truncate(4, True, '') == "http" %}
-    {% set selected_cover = HOME_COVER %}
-  {% else %}
-    {% set selected_cover = SITEURL+"/"+HOME_COVER %}
-  {% endif %}
 {% elif HEADER_COVER %}
   {% if HEADER_COVER|lower|truncate(4, True, '') == "http" %}
     {% set selected_cover = HEADER_COVER %}
@@ -46,35 +40,16 @@
 {% block header %}
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
-    <header id="post-header" {% if selected_cover or selected_color %}class="has-cover"{% endif %}>
+    <header class="post-header {% if selected_cover or selected_color %} has-cover {% endif %}">
       <div class="inner">
-        <nav id="navigation">
-          {% if SITE_LOGO %}
-            <span class="blog-logo">
-                <a href="{{ SITEURL }}/"><img src="{{SITE_LOGO}}" alt="Blog Logo" /></a>
-            </span>
-          {% else %}
-            <span id="home-button" class="nav-button">
-                <a class="home-button" href="{{ SITEURL }}/" aria-label="Home" title="Home">
-                  <i class="ic ic-arrow-left" aria-hidden="true"></i>
-                  <span>Home</span>
-                </a>
-            </span>
-          {% endif %}
-          <span id="menu-button" class="nav-button">
-            <a class="menu-button" aria-label="Menu">
-              <i class="ic ic-menu" aria-hidden="true"></i>
-              <span>Menu</span>
-            </a>
-          </span>
-        </nav>
-        <h1 class="post-title">{{ page.title }}</h1>
+        <h1 class="post-title">{{ current_title }}</h1>
         {% if selected_cover %}
-            <div class="post-cover cover" style="background-image: url('{{ selected_cover }}')">
+          <div class="post-cover cover">
+            <img src="{{ selected_cover }}" alt="{{ current_title }}" />
+          </div>
         {% elif selected_color %}
-            <div class="post-cover cover" style="background-color: {{ selected_color }}">
+          <div class="post-cover cover" style="background-color: {{ selected_color }}">
         {% endif %}
-      </div>
     </header>
 {% endblock header %}
 
@@ -86,23 +61,63 @@
           <section class="post-content">
               {{page.content}}
           </section>
-
-          <div class="clear"></div>
-
-          <div id="waline"></div>
-          <script>
-            Waline.init({
-              el: '#waline',
-              serverURL: 'https://waline-1-d9689975.deta.app/',
-              emoji: false,
-              imageUploader: false,
-              locale: {placeholder: '欢迎评论，填写邮箱支持获取头像和收到回复通知。'},
-            });
-          </script>
+          {% if WALINE_COMMENT %}<div id="waline"></div>{% endif %}
       </div>
       </article>
   </main>
 {% endblock content %}
 
-{% block index_js %}
-{% endblock index_js %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+  $(document).ready(function () {
+    var viewport = $(window);
+    var post = $('.post-content');
+    // Responsive videos with fitVids
+    post.fitVids();
+    // Format code blocks and add line numbers
+    function codestyling() {
+      $('pre code').each(function(i, e) {
+        // Code highlight
+        hljs.highlightElement(e);
+        // No lines for plain text blocks
+        if (!$(this).hasClass('language-text')) {
+          var code = $(this);
+          // Calculate amount of lines
+          var lines = code.html().split(/\n(?!$)/g).length;
+          var numbers = [];
+          if (lines > 1) {
+            lines++;
+          }
+          for (i = 1; i < lines; i++) {
+            numbers += '<span class="line" aria-hidden="true">' + i + '</span>';
+          }
+          code.parent().append('<div class="lines">' + numbers + '</div>');
+        }
+      });
+    }
+
+    // Format code blocks only
+    function codestylingWithoutLineNumbers() {
+      $("pre code").each(function(i, e) {
+        // Code highlight
+        hljs.highlightElement(e);
+      });
+    }
+
+    codestylingWithoutLineNumbers();
+  });
+
+  {% if WALINE_COMMENT and page.status != "draft" %}
+  Waline.init({
+      el: '#waline',
+      serverURL: "{{ WALINE_COMMENT.serverURL }}",
+      emoji: false,
+      search: false,
+      imageUploader: false,
+      locale: {placeholder: "{{ WALINE_COMMENT.locale.placeholder }}"},
+  });
+  {% endif %}
+</script>
+{% endblock %}

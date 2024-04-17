@@ -1,14 +1,15 @@
 {% extends "base.html" %}
 
-{% if dates %}
-{% set body_class='archives-template' %}
-{% set current_url=ARCHIVES_URL %}
-{% set current_title=SITENAME+' - Archives' %}
-{% set current_display_title='Archives' %}
+{% block title %}{{ SITENAME }} - Pages{% endblock %}
+
+{% if pages %}
+{% set body_class='pages-template' %}
+{% set current_url=PAGES_URL %}
+{% set current_title=SITENAME+' - Pages' %}
+{% set current_display_title='Pages' %}
 {% endif %}
 
-{% block title %}{{ SITENAME }} - Archives{% endblock %}
-
+{# <!-- Choosing cover image --> #}
 {% if HEADER_COVER %}
   {% if HEADER_COVER|lower|truncate(4, True, '') == "http" %}
     {% set selected_cover = HEADER_COVER %}
@@ -25,7 +26,7 @@
   {% set selected_color = HEADER_COLOR %}
 {% endif %}
 
-{% block canonical_url %}<link href="{{ SITEURL }}/{{ARCHIVES_URL}}" rel="canonical" />{% endblock canonical_url %}
+{% block canonical_url %}<link href="{{ SITEURL }}/{{PAGES_URL}}" rel="canonical" />{% endblock canonical_url %}
 
 {% block header %}
     <!-- Page Header -->
@@ -33,6 +34,7 @@
     <header class="blog-header {% if selected_cover or selected_color %} has-cover {% endif %}">
       <div class="inner">
         <h1 class="post-title">{{ current_display_title }}</h1>
+        <span class="blog-description">Pages: {{ pages|count }}</span>
         {% if selected_cover %}
           <div class="post-cover cover">
             <img src="{{ selected_cover }}" alt="{{ current_title }}" />
@@ -45,16 +47,10 @@
 {% endblock header %}
 
 {% block content %}
-  <article class="post">
-    <div class="inner archives">
-      <section class="post-content">
-        <dl>
-        {% for article in dates %}
-          <dt>{{ article.locale_date }}</dt>
-          <dd><a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a></dd>
-        {% endfor %}
-        </dl>
-      </section>
-    </div>
-  </article>
+
+<div id="index" class="container">
+  <main class="content" role="main">
+    {% include "partials/loop.html" %}
+  </main>
+</div>
 {% endblock content %}
