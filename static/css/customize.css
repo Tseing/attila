@@ -85,6 +85,10 @@ samp {
   font-style: normal;
 }
 
+.post-content del {
+  text-decoration: line-through 1.5px var(--color-primary);
+}
+
 .post-content a {
   box-shadow: unset;
   border-bottom: 1px solid var(--color-primary);
@@ -144,8 +148,16 @@ samp {
   padding: 0.5em 1em;
 }
 
+.post-content img {
+  margin: 0 auto 4rem;
+}
+
 .theme-dark .post-content img {
   filter: brightness(0.9);
+}
+
+.content:has(#waline) + .nav-footer {
+  padding-top: 0;
 }
 
 /* css for summary tags */
