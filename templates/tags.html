@@ -27,6 +27,13 @@
 
 {% block canonical_url %}<link href="{{ SITEURL }}/{{ TAGS_URL }}" rel="canonical" />{% endblock canonical_url %}
 
+{% if tags %}
+{% set body_class='tags-template' %}
+{% set current_url='/'+TAGS_URL %}
+{% set current_title=SITENAME+' - Tags' %}
+{% set current_display_title='Tags' %}
+{% endif %}
+
 {% block header %}
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
